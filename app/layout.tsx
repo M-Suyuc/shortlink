@@ -5,6 +5,7 @@ import { inter } from '@/config/fonts'
 
 import SessionProvider from '@/providers/session-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
+import { ModalProvider } from '@/context/modal'
 
 export const metadata: Metadata = {
   title: 'Short Link',
@@ -27,8 +28,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            {children}
+            <ModalProvider>
+              <Navbar />
+              {children}
+            </ModalProvider>
           </ThemeProvider>
         </SessionProvider>
       </body>

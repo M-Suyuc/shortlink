@@ -11,6 +11,7 @@ Response-NextUrl.js
 migrations
 dev.db
 dev.db-journal
+pnpm-lock.yaml
 
 # testing
 /coverage

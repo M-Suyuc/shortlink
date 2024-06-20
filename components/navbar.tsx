@@ -15,16 +15,6 @@ const Navbar = async () => {
           <Link href='/home' className='p-2.5 rounded-full bg-black'>
             <Logo className='size-6' />
           </Link>
-          {/* center */}
-          {session?.user && (
-            <div className='flex justify-between'>
-              <div className='flex gap-4 items-center'>
-                {/* <p>{session.user.name}</p> */}
-                {/* <p>{session.user.id}</p> */}
-              </div>
-            </div>
-          )}
-          {/* rigth*/}
           <div className='flex gap-4 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse'>
             <Link href='https://github.com/M-Suyuc' target='_blank'>
               <GithubLogo className='size-6' />

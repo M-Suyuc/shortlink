@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
 import { useParams, useRouter } from 'next/navigation'
 
 import Modal from '@/components/modal-link'
@@ -20,7 +19,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Link } from '@prisma/client'
 import { useModalContext } from '@/context/modal'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 const formSchema = z.object({
   url: z
@@ -43,8 +43,11 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
   const { isOpenModal, hideModal } = useModalContext()
 
   const router = useRouter()
-  const { toast } = useToast()
   const params = useParams()
+
+  const title = initialData ? 'Edit shortLink' : 'Create a new shortLink'
+  const toastMessage = initialData ? 'ShortLink updated.' : 'ShortLink created.'
+  const action = initialData ? 'Save changes' : 'Create'
 
   const form = useForm<LinkFormValues>({
     resolver: zodResolver(formSchema),
@@ -53,28 +56,21 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
       shortLink: ''
     }
   })
-
   const onSubmit = async (data: LinkFormValues) => {
     try {
       setloading(true)
       if (initialData) {
-        await axios.put(`/api/shortUrl/${params.id}`, data)
+        await axios.put(`/api/shortUrl/${params.linkId}`, data)
       } else {
-        const response = await axios.post(`/api/shortUrl`, data)
-        if (response.statusText === 'OK') {
-          hideModal()
-          toast({
-            title: (response.data.message = 'Link created successfully')
-          })
-        }
+        await axios.post(`/api/shortUrl`, data)
       }
+
+      hideModal()
+      router.push(`/dashboard`)
       router.refresh()
-      form.reset()
+      toast.success(toastMessage)
     } catch (error: any) {
-      toast({
-        title: error.response.data.message || 'An error occurred',
-        variant: 'destructive'
-      })
+      toast.error(error.response.data.message || 'An error occurred')
     } finally {
       setloading(false)
     }
@@ -82,11 +78,7 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
 
   return (
     <div>
-      <Modal
-        title='Create a new shortLink'
-        isOpen={isOpenModal}
-        onClose={() => hideModal()}
-      >
+      <Modal title={title} isOpen={isOpenModal} onClose={() => router.back()}>
         <div className='space-y-4 py-2 pb-6'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -97,7 +89,11 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
                   <FormItem>
                     <FormLabel>Url</FormLabel>
                     <FormControl>
-                      <Input disabled={loading} placeholder='url' {...field} />
+                      <Input
+                        disabled={loading}
+                        placeholder='https://mi-sitie.com'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -112,7 +108,7 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
                     <FormControl>
                       <Input
                         disabled={loading}
-                        placeholder='short url'
+                        placeholder='shortUrl'
                         {...field}
                       />
                     </FormControl>
@@ -124,12 +120,12 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
                 <Button
                   disabled={loading}
                   variant='outline'
-                  onClick={() => hideModal()}
+                  onClick={() => router.back()}
                 >
                   Cancel
                 </Button>
                 <Button disabled={loading} type='submit'>
-                  Create
+                  {action}
                 </Button>
               </div>
             </form>

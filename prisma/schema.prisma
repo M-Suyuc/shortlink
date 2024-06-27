@@ -55,12 +55,10 @@ model Session {
 model Link {
   id          String @id @default(uuid())
   url         String 
-  shortLink   String 
+  shortLink   String  @unique
   creatorId   String
   createdBy   User?      @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
-  // clicks      Int        @default(0)
-  // lastClicked DateTime?
 
   @@index([creatorId])
   @@index([url])

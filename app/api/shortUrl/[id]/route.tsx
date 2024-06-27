@@ -2,16 +2,16 @@ import prisma from '@/lib/prismadb'
 import { auth } from '@/auth'
 import { NextResponse } from 'next/server'
 
+// Update shortLink
 export async function PUT(
   req: Request,
-  { params }: { params: { url: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     const body = await req.json()
     const session = await auth()
 
     const { url, shortLink } = body
-    console.log(body)
 
     const userId = session?.user?.id
 
@@ -28,23 +28,24 @@ export async function PUT(
     if (!shortLink) {
       return new NextResponse('shortLink is required', { status: 400 })
     }
+    const link = await prisma.link.update({
+      where: {
+        id: params.id
+      },
+      data: {
+        url,
+        shortLink
+      }
+    })
 
-    // const link = await prisma.link.update({
-    //   where
-    //   // data: {
-    //   //   url,
-    //   //   shortLink: shortLink,
-    //   //   creatorId: userId
-    //   // }
-    // })
-
-    // return NextResponse.json(link)
+    return NextResponse.json(link)
   } catch (error) {
     console.log('[SHORT_URL]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }
 
+// Delete shortLink
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }

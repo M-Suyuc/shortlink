@@ -30,12 +30,4 @@ export const DEFAULT_LOGIN_REDIRECT_URL = '/dashboard'
  *  Required authentication.
  * @type {string[]}
  */
-export const protectedRoutes = ['/dashboard', '/settings']
-
-/**
- *  These routes are used for the check slug.
- *  Only type the prefix, with "/".
- *  Not required for authentication.
- * @type {string[]}
- */
-export const checkRoutesPrefix = '/check'
+export const protectedRoute = ['/dashboard', '/settings', '/:shortLink']

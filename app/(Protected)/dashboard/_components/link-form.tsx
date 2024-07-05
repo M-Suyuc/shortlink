@@ -7,7 +7,7 @@ import z from 'zod'
 import { Button } from '@/components/ui/button'
 import { useParams, useRouter } from 'next/navigation'
 
-import Modal from '@/components/modal-link'
+import Modal from '@/components/modals/modal-link'
 import {
   Form,
   FormControl,
@@ -25,13 +25,17 @@ import { toast } from 'react-hot-toast'
 const formSchema = z.object({
   url: z
     .string()
-    .min(4)
+    .min(4, { message: 'Must be at least 4 characters long' })
     .startsWith('https://', { message: 'Must provide secure URL' })
     .url({ message: 'Invalid url' }),
   shortLink: z
     .string()
     .min(4, { message: 'Must be at least 4 characters long' })
+    .refine((val) => !/\s/.test(val), {
+      message: 'Value should not contain spaces'
+    })
 })
+
 type LinkFormValues = z.infer<typeof formSchema>
 
 interface LinkFormProps {

@@ -3,24 +3,20 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { BoxesIcon, LogOut, LucideHome, Settings } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function MenuProfile({ session }: { session: any }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Image
           className='w-8 h-8 rounded-full cursor-pointer'
           src={session.image}
@@ -29,60 +25,59 @@ export function MenuProfile({ session }: { session: any }) {
           height={100}
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56'>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+
+      <DropdownMenuContent
+        forceMount
+        className='w-64 mr-6 mt-3 py-4 rounded-xl'
+      >
+        <DropdownMenuLabel>{session.name}</DropdownMenuLabel>
+        <DropdownMenuLabel className='text-gray-400 py-0 font-light'>
+          {session.email}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
+
+        <DropdownMenuItem className='cursor-pointer  py-2'>
+          <Link
+            href='/home'
+            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
+          >
+            <LucideHome className='size-5 mr-3 dark:text-gray-400' />
+            Home Page
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem className='cursor-pointer py-2'>
+          <Link
+            href='/dashboard'
+            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
+          >
+            <BoxesIcon className='size-5 mr-3 dark:text-gray-400' />
+            Dashboard
+          </Link>
+          {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
+        </DropdownMenuItem>
+
+        <DropdownMenuItem className='cursor-pointer py-2'>
+          <Link
+            href='/dashboard'
+            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center '
+          >
+            <Settings className='size-5 mr-3 dark:text-gray-400' />
             Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Keyboard shortcuts
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
 
-        {/* <DropdownMenuGroup>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem>Email</DropdownMenuItem>
-                <DropdownMenuItem>Message</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>More...</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-          <DropdownMenuItem>
-            New Team
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup> */}
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem>GitHub</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
-        {/* <DropdownMenuItem disabled>API</DropdownMenuItem> */}
-        <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() =>
             signOut({
               callbackUrl: '/'
             })
           }
+          className='cursor-pointer text-base font-light  w-full h-full dark:text-gray-400 py-2'
         >
+          <LogOut className='size-5 mr-3 dark:text-gray-400' />
           Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

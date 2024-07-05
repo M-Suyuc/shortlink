@@ -20,7 +20,12 @@ export default function LinkClient({ data }: { data: Link[] }) {
   return (
     <LayoutBorder>
       <nav className='py-4 flex justify-end'>
-        <Button onClick={handleRedirect}>Create Link</Button>
+        <Button
+          className='bg-black py-5 px-6 font-medium text-lg dark:bg-[#ededed]'
+          onClick={handleRedirect}
+        >
+          Create Link
+        </Button>
       </nav>
       <ListLinks data={data} />
     </LayoutBorder>

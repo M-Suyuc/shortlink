@@ -12,8 +12,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useOrigin } from '@/hooks/use-origin'
-import Modal from './modal-link'
-import { Button } from './ui/button'
+import { AlertModal } from './modals/alert-modal'
 
 interface Props {
   data: Link[]
@@ -21,6 +20,8 @@ interface Props {
 
 export const ListLinks: React.FC<Props> = ({ data }) => {
   const [loading, setloading] = useState(false)
+  const [open, setOpen] = useState(false)
+
   const { showModal } = useModalContext()
 
   const router = useRouter()
@@ -37,8 +38,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
       setloading(true)
       await axios.delete(`/api/shortUrl/${id}`)
       router.refresh()
+      toast.success('ShortLink deleted.')
     } catch (error) {
       console.error('Error:', error)
+      toast.error(
+        'Make sure you removed all products using this category first.'
+      )
     } finally {
       setloading(false)
     }
@@ -54,18 +59,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
     <>
       {data && (
         <>
-          <Modal title='' isOpen={false} onClose={() => {}}>
-            <div className='pt-6 space-x-2 flex items-center justify-end w-full'>
-              <Button
-                disabled={loading}
-                variant='outline'
-                onClick={() => router.back()}
-              >
-                Cancel
-              </Button>
-              <Button disabled={loading}>Delete</Button>
-            </div>
-          </Modal>
+          <AlertModal
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            loading={loading}
+            onConfirm={() => onDelete}
+          />
 
           <div className='grid gap-4 grid-cols-auto-fill-100  w-full h-full'>
             {data.map((item: Link) => {
@@ -73,12 +72,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
               return (
                 <article
                   key={item.id}
-                  className='flex flex-col gap-2 border border-neutral-700/70 p-4 rounded-md dark:bg-black'
+                  className='flex flex-col gap-2 border border-neutral-700/70 p-5 rounded-md dark:bg-black'
                 >
                   <div className='flex justify-between'>
                     <div>
                       <p>{item.shortLink}</p>
-                      <h3>{item.url}</h3>
+                      <h3 className='text-gray-400'>{item.url}</h3>
                     </div>
                     <div className='flex gap-2'>
                       <TooltipProvider delayDuration={300}>

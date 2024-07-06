@@ -26,17 +26,14 @@ export function MenuProfile({ session }: { session: any }) {
         />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        forceMount
-        className='w-64 mr-6 mt-3 py-4 rounded-xl'
-      >
+      <DropdownMenuContent className='w-64 mr-6 mt-3 py-4 rounded-xl'>
         <DropdownMenuLabel>{session.name}</DropdownMenuLabel>
         <DropdownMenuLabel className='text-gray-400 py-0 font-light'>
           {session.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='cursor-pointer  py-2'>
+        <DropdownMenuItem asChild className='cursor-pointer  py-2'>
           <Link
             href='/home'
             className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
@@ -46,7 +43,7 @@ export function MenuProfile({ session }: { session: any }) {
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className='cursor-pointer py-2'>
+        <DropdownMenuItem asChild className='cursor-pointer py-2'>
           <Link
             href='/dashboard'
             className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
@@ -57,7 +54,7 @@ export function MenuProfile({ session }: { session: any }) {
           {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
         </DropdownMenuItem>
 
-        <DropdownMenuItem className='cursor-pointer py-2'>
+        <DropdownMenuItem asChild className='cursor-pointer py-2'>
           <Link
             href='/dashboard'
             className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center '

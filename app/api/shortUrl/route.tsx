@@ -22,7 +22,6 @@ export async function POST(req: Request) {
 
     const existingLink = await prisma.link.findFirst({
       where: {
-        creatorId: userId,
         shortLink
       }
     })

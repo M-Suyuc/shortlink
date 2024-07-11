@@ -4,6 +4,8 @@ import { MenuProfile } from './menu-profile'
 import { GithubLogo, Logo } from './logos'
 import { auth } from '@/auth'
 import { DropdownMenuSeparator } from './ui/dropdown-menu'
+import { ArrowRight } from 'lucide-react'
+import { buttonVariants } from './ui/button'
 
 const Navbar = async () => {
   const session = await auth()
@@ -25,7 +27,20 @@ const Navbar = async () => {
               <GithubLogo className='size-6' />
             </Link>
             <ThemeToggle />
-            {session && <MenuProfile session={session?.user} />}
+            {session ? (
+              <MenuProfile session={session?.user} />
+            ) : (
+              <Link
+                href='/dashboard'
+                className={buttonVariants({
+                  variant: 'outline',
+                  className: 'group inline-flex text-lg font-light py-5'
+                })}
+              >
+                <span>Get Started</span>
+                <ArrowRight className='ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1' />
+              </Link>
+            )}
           </div>
         </div>
       </nav>

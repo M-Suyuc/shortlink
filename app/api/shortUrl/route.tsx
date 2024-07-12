@@ -11,8 +11,6 @@ export async function POST(req: Request) {
 
     const userId = session?.user?.id
 
-    if (!session?.user) return null
-
     if (!userId) return new NextResponse('Unauthenticated', { status: 403 })
 
     if (!url) return new NextResponse('Url is required', { status: 400 })

@@ -48,26 +48,25 @@ export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const idLink = params.id
-  const session = await auth()
-  const userId = session?.user?.id
-
-  if (!session?.user) return null
-
-  if (!userId) {
-    return new NextResponse('Unauthenticated', { status: 403 })
-  }
-
-  if (!params.id) {
-    return new NextResponse('Link id is required', { status: 400 })
-  }
-
   try {
+    const idLink = params.id
+    const session = await auth()
+    const userId = session?.user?.id
+
+    if (!userId) {
+      return new NextResponse('Unauthenticated', { status: 403 })
+    }
+
+    if (!params.id) {
+      return new NextResponse('Link id is required', { status: 400 })
+    }
+
     const Link = await prisma.link.delete({
       where: {
         id: idLink
       }
     })
+
     return NextResponse.json(Link)
   } catch (error) {
     console.log('[LINK_DELETE]', error)

@@ -1,11 +1,12 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useModalContext } from '@/context/modal'
 import { Input } from '@/components/ui/input'
-import { LayoutGrid, List, Search } from 'lucide-react'
+import { LayoutGrid, List, Plus, Search } from 'lucide-react'
 import { useDebouncedCallback } from 'use-debounce'
+import clsx from 'clsx'
 
 export default function LinkClient() {
   const router = useRouter()
@@ -29,8 +30,19 @@ export default function LinkClient() {
     router.replace(`${pathname}?${params.toString()}`)
   }, 400)
 
+  const handleViewItems = (view: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (view) {
+      params.set('view', view)
+    } else {
+      params.delete('view')
+    }
+
+    router.replace(`${pathname}?${params.toString()}`)
+  }
+
   return (
-    <nav className='my-4 flex gap-4 h-12'>
+    <nav className='my-4 flex gap-3 h-10'>
       {/* search */}
       <div className='h-full flex-1 relative text-zinc-600'>
         <Search className='absolute top-[25%] bottom-[-50%] left-4' />
@@ -42,15 +54,37 @@ export default function LinkClient() {
         />
       </div>
       {/* views */}
-      <div className='flex justify-center items-center text-gray-500 border border-zinc-800 p-1.5'>
-        <LayoutGrid className='cursor-pointer hover:stroke-white p-[6px]  w-full h-full hover:bg-zinc-800 ' />
-        <List className='cursor-pointer hover:stroke-white p-[6px] w-full h-full hover:bg-zinc-800' />
+      <div className='flex items-center text-gray-500 border dark:border-zinc-800 rounded-md p-0.5'>
+        <LayoutGrid
+          className={clsx(
+            'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
+            {
+              'bg-neutral-800/20 dark:bg-neutral-800/50':
+                searchParams.get('view') === 'grid'
+            }
+          )}
+          onClick={() => handleViewItems('grid')}
+        />
+        <List
+          className={clsx(
+            'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
+            {
+              'bg-neutral-800/20 dark:bg-neutral-800/50':
+                searchParams.get('view') === 'list'
+            }
+          )}
+          onClick={() => handleViewItems('list')}
+        />
       </div>
       {/* btn create*/}
       <Button
-        className='bg-black px-6 font-medium text-lg dark:bg-[#ededed] h-full'
+        className={buttonVariants({
+          variant: 'secondary',
+          className: 'flex gap-2 bg-black text-white h-full'
+        })}
         onClick={handleRedirect}
       >
+        <Plus size={14} />
         Create Link
       </Button>
     </nav>

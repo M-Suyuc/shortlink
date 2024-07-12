@@ -1,3 +1,5 @@
+'use client'
+
 import { Link } from '@prisma/client'
 import {
   Tooltip,
@@ -6,13 +8,14 @@ import {
   TooltipTrigger
 } from './ui/tooltip'
 import { Copy, Settings, Trash2 } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useModalContext } from '@/context/modal'
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useOrigin } from '@/hooks/use-origin'
 import { AlertModal } from './modals/alert-modal'
+import clsx from 'clsx'
 
 interface Props {
   data: Link[]
@@ -26,7 +29,10 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
 
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const origin = useOrigin()
+  const search = searchParams.get('search')
+  const view = searchParams.get('view')
 
   const handleSetting = (id: string) => {
     router.push(`${pathname}/link/${id}`)
@@ -66,20 +72,28 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
             onConfirm={() => onDelete}
           />
 
-          <div className='grid gap-4 grid-cols-auto-fill-100  w-full h-full'>
+          <div
+            className={clsx(
+              'w-full h-full',
+              view === 'list' && 'flex flex-col gap-2',
+              view === 'grid' && 'grid gap-2 grid-cols-auto-fill-100 '
+            )}
+          >
             {data.map((item: Link) => {
-              const [formatDate] = item.createdAt.toISOString().split('T')
+              // const [formatDate] = item.createdAt.toISOString().split('T')
+              const formatDate = item.createdAt.toLocaleDateString('en-us', {
+                year: 'numeric',
+                day: 'numeric',
+                month: 'short'
+              })
               return (
                 <article
                   key={item.id}
-                  className='flex flex-col gap-2 border border-neutral-700/70 p-5 rounded-md dark:bg-black'
+                  className='flex flex-col gap-2 border border-neutral-700/70 p-4 rounded-md dark:bg-black'
                 >
                   <div className='flex justify-between'>
-                    <div>
-                      <p>{item.shortLink}</p>
-                      <h3 className='text-gray-400'>{item.url}</h3>
-                    </div>
-                    <div className='flex gap-2'>
+                    <p>{item.shortLink}</p>
+                    <div className='flex'>
                       <TooltipProvider delayDuration={300}>
                         <Tooltip>
                           <TooltipTrigger
@@ -88,7 +102,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                           >
                             <Settings
                               size={38}
-                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md'
+                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md dark:stroke-[#e9e9e9e9]'
                             />
                           </TooltipTrigger>
                           <TooltipContent>Setting</TooltipContent>
@@ -103,7 +117,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                           >
                             <Copy
                               size={38}
-                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md'
+                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md dark:stroke-[#e9e9e9e9]'
                             />
                           </TooltipTrigger>
                           <TooltipContent>Copy</TooltipContent>
@@ -118,7 +132,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                           >
                             <Trash2
                               size={38}
-                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md'
+                              className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800   p-2.5 rounded-md dark:stroke-[#e9e9e9e9]'
                             />
                           </TooltipTrigger>
                           <TooltipContent>Delete</TooltipContent>
@@ -126,6 +140,9 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                       </TooltipProvider>
                     </div>
                   </div>
+
+                  <h3 className='text-gray-400 truncate'>{item.url}</h3>
+
                   <p className='text-end text-sm text-neutral-400'>
                     {formatDate}
                   </p>
@@ -134,6 +151,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
             })}
           </div>
         </>
+      )}
+
+      {data.length === 0 && (
+        <span className='text-xl text-center mt-10 w-full inline-block selection:not-sr-only text-neutral-900 dark:text-neutral-500'>
+          &apos;{search}&apos; not Found
+        </span>
       )}
     </>
   )

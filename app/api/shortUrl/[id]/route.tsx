@@ -15,8 +15,6 @@ export async function PUT(
 
     const userId = session?.user?.id
 
-    if (!session?.user) return null
-
     if (!userId) {
       return new NextResponse('Unauthenticated', { status: 403 })
     }

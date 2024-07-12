@@ -10,12 +10,11 @@ import {
 import { Copy, Settings, Trash2 } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useModalContext } from '@/context/modal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useOrigin } from '@/hooks/use-origin'
 import { AlertModal } from './modals/alert-modal'
-import clsx from 'clsx'
 
 interface Props {
   data: Link[]
@@ -24,6 +23,7 @@ interface Props {
 export const ListLinks: React.FC<Props> = ({ data }) => {
   const [loading, setloading] = useState(false)
   const [open, setOpen] = useState(false)
+  const [viewMode, setViewMode] = useState('grid')
 
   const { showModal } = useModalContext()
 
@@ -33,6 +33,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
   const origin = useOrigin()
   const search = searchParams.get('search')
   const view = searchParams.get('view')
+
+  useEffect(() => {
+    if (view) {
+      setViewMode(view)
+    }
+  }, [view])
 
   const handleSetting = (id: string) => {
     router.push(`${pathname}/link/${id}`)
@@ -73,11 +79,11 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
           />
 
           <div
-            className={clsx(
-              'w-full h-full',
-              view === 'list' && 'flex flex-col gap-2',
-              view === 'grid' && 'grid gap-2 grid-cols-auto-fill-100 '
-            )}
+            className={
+              viewMode === 'grid'
+                ? 'grid gap-2 grid-cols-auto-fill-100'
+                : 'flex flex-col gap-2'
+            }
           >
             {data.map((item: Link) => {
               // const [formatDate] = item.createdAt.toISOString().split('T')

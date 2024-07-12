@@ -15,8 +15,8 @@ const Navbar = async () => {
       <nav className='px-6 py-3'>
         <div className='max-w-screen-2xl w-full flex flex-wrap items-center justify-between mx-auto'>
           <div className='flex items-center gap-2'>
-            <Link href='/home' className='p-2.5 rounded-full bg-black'>
-              <Logo className='size-6' />
+            <Link href='#' className='p-2.5 rounded-full bg-black'>
+              <Logo className='size-6 ' />
             </Link>
             <p className='text-white/80 text-lg font-bold'>
               {session?.user?.name}

@@ -36,6 +36,7 @@ export function MenuProfile({ session }: { session: any }) {
         <DropdownMenuItem asChild className='cursor-pointer  py-2'>
           <Link
             href='/home'
+            target='_blank'
             className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
           >
             <LucideHome className='size-5 mr-3 dark:text-gray-400' />

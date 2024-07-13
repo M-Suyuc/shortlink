@@ -159,7 +159,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
         </>
       )}
 
-      {data.length === 0 && (
+      {!data && (
         <span className='text-xl text-center mt-10 w-full inline-block selection:not-sr-only text-neutral-900 dark:text-neutral-500'>
           &apos;{search}&apos; not Found
         </span>

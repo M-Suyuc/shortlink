@@ -1,6 +1,6 @@
 'use client'
 
-import Facebook, { GithubLogo, GoogleLogo, Logo } from '@/components/logos'
+import { GithubLogo, GoogleLogo, Logo } from '@/components/logos'
 import { Button } from '@/components/ui/button'
 import { Loader } from 'lucide-react'
 import { signIn } from 'next-auth/react'
@@ -16,11 +16,6 @@ const socialProviders = [
     name: 'Continue with GitHub',
     icon: <GithubLogo className='h-5 w-5' />,
     provider: 'github'
-  },
-  {
-    name: 'Continue with Facebook',
-    icon: <Facebook className='h-5 w-5' />,
-    provider: 'facebook'
   }
 ]
 

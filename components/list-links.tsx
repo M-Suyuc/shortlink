@@ -33,6 +33,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
   const origin = useOrigin()
   const search = searchParams.get('search')
   const view = searchParams.get('view')
+  const params = new URLSearchParams(searchParams)
 
   useEffect(() => {
     if (view) {
@@ -49,6 +50,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
     try {
       setloading(true)
       await axios.delete(`/api/shortUrl/${id}`)
+      router.push('/dashboard')
       router.refresh()
       toast.success('ShortLink deleted.')
     } catch (error) {
@@ -58,7 +60,20 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
       )
     } finally {
       setloading(false)
+      setOpen(false)
     }
+  }
+
+  const handleDelete = (id: string) => {
+    // TODO Find a way more efficient for delete a shortLink
+    setOpen(true)
+    if (id) {
+      params.set('id', id)
+    } else {
+      params.delete('id')
+    }
+
+    router.replace(`${pathname}?${params.toString()}`)
   }
 
   const onCopy = async (shortLink: string) => {
@@ -75,7 +90,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
             isOpen={open}
             onClose={() => setOpen(false)}
             loading={loading}
-            onConfirm={() => onDelete}
+            onConfirm={() => onDelete(searchParams.get('id')!!)}
           />
 
           <div
@@ -134,7 +149,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                         <Tooltip>
                           <TooltipTrigger
                             asChild
-                            onClick={() => onDelete(item.id)}
+                            onClick={() => handleDelete(item.id)}
                           >
                             <Trash2
                               size={38}

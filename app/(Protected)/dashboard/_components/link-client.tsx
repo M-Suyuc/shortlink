@@ -59,7 +59,7 @@ export default function LinkClient() {
           className={clsx(
             'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
             {
-              'bg-neutral-800/20 dark:bg-neutral-800/50':
+              'bg-neutral-800/20 dark:bg-neutral-700/50':
                 searchParams.get('view') === 'grid'
             }
           )}
@@ -69,7 +69,7 @@ export default function LinkClient() {
           className={clsx(
             'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
             {
-              'bg-neutral-800/20 dark:bg-neutral-800/50':
+              'bg-neutral-800/20 dark:bg-neutral-700/50':
                 searchParams.get('view') === 'list'
             }
           )}

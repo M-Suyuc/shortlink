@@ -18,7 +18,7 @@ const Navbar = async () => {
             <Link href='#' className='p-2.5 rounded-full bg-black'>
               <Logo className='size-6 ' />
             </Link>
-            <p className='text-white/80 text-lg font-bold'>
+            <p className='hidden sm:text-white/80 sm:text-lg sm:font-bold'>
               {session?.user?.name}
             </p>
           </div>

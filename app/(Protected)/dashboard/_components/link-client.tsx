@@ -45,16 +45,16 @@ export default function LinkClient() {
     <nav className='my-4 flex gap-3 h-10'>
       {/* search */}
       <div className='h-full flex-1 relative text-zinc-600'>
-        <Search className='absolute top-[25%] bottom-[-50%] left-4' />
+        <Search className='absolute top-1/2 transform -translate-y-1/2 tras left-2 sm:left-4 size-3 sm:size-6 ' />
         <Input
           placeholder='Search your shortLink'
-          className='h-full placeholder:text-base text-zinc-200 dark:placeholder:text-zinc-600 dark:placeholder:font-medium pl-14'
+          className='h-full text-xs sm:text-2xl placeholder:text-xs sm:placeholder:text-base text-zinc-200 dark:placeholder:text-zinc-600 dark:placeholder:font-medium pl-6 sm:pl-14 '
           onChange={(event) => handleSearch(event.target.value)}
           defaultValue={searchParams.get('search')?.toString()}
         />
       </div>
       {/* views */}
-      <div className='flex items-center text-gray-500 border dark:border-zinc-800 rounded-md p-0.5'>
+      <div className='hidden sm:flex items-center text-gray-500 border dark:border-zinc-800 rounded-md p-0.5'>
         <LayoutGrid
           className={clsx(
             'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',

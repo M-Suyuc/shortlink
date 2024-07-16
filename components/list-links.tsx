@@ -112,7 +112,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                   key={item.id}
                   className='flex flex-col gap-2 border border-neutral-700/70 p-4 rounded-md dark:bg-black'
                 >
-                  <div className='flex justify-between'>
+                  <div className='flex justify-between '>
                     <p>{item.shortLink}</p>
                     <div className='flex'>
                       <TooltipProvider delayDuration={300}>

@@ -56,7 +56,7 @@ export default function LinkClient() {
         <Search className="absolute top-1/2 transform -translate-y-1/2 tras left-2 sm:left-4 size-3 sm:size-6 " />
         <Input
           placeholder="Search your shortLink"
-          className="h-full text-xs sm:text-2xl placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-14 "
+          className="h-full text-xs sm:text-xl placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-14 "
           onChange={(event) => handleSearch(event.target.value)}
           defaultValue={searchParams.get("search")?.toString()}
         />

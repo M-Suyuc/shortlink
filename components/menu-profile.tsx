@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   DropdownMenu,
@@ -6,61 +6,60 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { BoxesIcon, LogOut, LucideHome, Settings } from 'lucide-react'
-import { signOut } from 'next-auth/react'
-import Image from 'next/image'
-import Link from 'next/link'
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { BoxesIcon, LogOut, LucideHome, Settings } from "lucide-react";
+import { signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function MenuProfile({ session }: { session: any }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Image
-          className='w-8 h-8 rounded-full cursor-pointer'
+          className="w-8 h-8 rounded-full cursor-pointer"
           src={session.image}
-          alt='user photo'
+          alt="user photo"
           width={100}
           height={100}
         />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className='w-64 mr-6 mt-3 py-4 rounded-xl'>
+      <DropdownMenuContent className="w-64 mr-6 mt-3 py-4 rounded-md">
         <DropdownMenuLabel>{session.name}</DropdownMenuLabel>
-        <DropdownMenuLabel className='text-gray-400 py-0 font-light'>
+        <DropdownMenuLabel className="text-foreground/60 py-0 font-light">
           {session.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem asChild className='cursor-pointer  py-2'>
+        <DropdownMenuItem asChild className="cursor-pointer  py-2">
           <Link
-            href='/home'
-            target='_blank'
-            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
+            href="/home"
+            target="_blank"
+            className="text-sm w-full h-full text-foreground/80 flex items-center"
           >
-            <LucideHome className='size-5 mr-3 dark:text-gray-400' />
+            <LucideHome className="size-[18px] mr-3 text-foreground/80" />
             Home Page
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild className='cursor-pointer py-2'>
+        <DropdownMenuItem asChild className="cursor-pointer py-2">
           <Link
-            href='/dashboard'
-            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center'
+            href="/dashboard"
+            className="text-sm w-full h-full text-foreground/80 flex items-center"
           >
-            <BoxesIcon className='size-5 mr-3 dark:text-gray-400' />
+            <BoxesIcon className="size-[18px] mr-3 text-foreground/80" />
             Dashboard
           </Link>
-          {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild className='cursor-pointer py-2'>
+        <DropdownMenuItem asChild className="cursor-pointer py-2">
           <Link
-            href='/dashboard'
-            className='text-base font-light w-full h-full text-black dark:text-gray-400 flex items-center '
+            href="/dashboard"
+            className="text-sm w-full h-full text-foreground/80 flex items-center "
           >
-            <Settings className='size-5 mr-3 dark:text-gray-400' />
+            <Settings className="size-[18px] mr-3 text-foreground/80" />
             Settings
           </Link>
         </DropdownMenuItem>
@@ -69,15 +68,15 @@ export function MenuProfile({ session }: { session: any }) {
         <DropdownMenuItem
           onClick={() =>
             signOut({
-              callbackUrl: '/'
+              callbackUrl: "/",
             })
           }
-          className='cursor-pointer text-base font-light  w-full h-full dark:text-gray-400 py-2'
+          className="cursor-pointer text-sm w-full h-full text-foreground/80"
         >
-          <LogOut className='size-5 mr-3 dark:text-gray-400' />
+          <LogOut className="size-[18px] mr-3 text-foreground/80" />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

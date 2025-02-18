@@ -1,92 +1,95 @@
-'use client'
+"use client";
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useModalContext } from '@/context/modal'
-import { Input } from '@/components/ui/input'
-import { LayoutGrid, List, Plus, Search } from 'lucide-react'
-import { useDebouncedCallback } from 'use-debounce'
-import clsx from 'clsx'
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+import {
+  LayoutGrid,
+  LayoutGridIcon,
+  List,
+  ListIcon,
+  Plus,
+  Search,
+} from "lucide-react";
+import clsx from "clsx";
+import { useModalContext } from "@/context/modal";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function LinkClient() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const { showModal } = useModalContext()
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { showModal } = useModalContext();
 
   const handleRedirect = () => {
-    router.push(`${pathname}/link/new`)
-    showModal()
-  }
+    router.push(`${pathname}/link/new`);
+    showModal();
+  };
 
   const handleSearch = useDebouncedCallback((search: string) => {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams);
     if (search) {
-      params.set('search', search)
+      params.set("search", search);
     } else {
-      params.delete('search')
+      params.delete("search");
     }
 
-    router.replace(`${pathname}?${params.toString()}`)
-  }, 400)
+    router.replace(`${pathname}?${params.toString()}`);
+  }, 400);
 
   const handleViewItems = (view: string) => {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams);
     if (view) {
-      params.set('view', view)
+      params.set("view", view);
     } else {
-      params.delete('view')
+      params.delete("view");
     }
 
-    router.replace(`${pathname}?${params.toString()}`)
-  }
+    router.replace(`${pathname}?${params.toString()}`);
+  };
 
   return (
-    <nav className='my-4 flex gap-3 h-10'>
+    <nav className="my-4 flex items-center gap-3 h-11">
       {/* search */}
-      <div className='h-full flex-1 relative text-zinc-600'>
-        <Search className='absolute top-1/2 transform -translate-y-1/2 tras left-2 sm:left-4 size-3 sm:size-6 ' />
+      <div className="h-full flex-1 relative text-zinc-600">
+        <Search className="absolute top-1/2 transform -translate-y-1/2 tras left-2 sm:left-4 size-3 sm:size-6 " />
         <Input
-          placeholder='Search your shortLink'
-          className='h-full text-xs sm:text-2xl placeholder:text-xs sm:placeholder:text-base text-zinc-200 dark:placeholder:text-zinc-600 dark:placeholder:font-medium pl-6 sm:pl-14 '
+          placeholder="Search your shortLink"
+          className="h-full text-xs sm:text-2xl placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-14 "
           onChange={(event) => handleSearch(event.target.value)}
-          defaultValue={searchParams.get('search')?.toString()}
+          defaultValue={searchParams.get("search")?.toString()}
         />
       </div>
       {/* views */}
-      <div className='hidden sm:flex items-center text-gray-500 border dark:border-zinc-800 rounded-md p-0.5'>
-        <LayoutGrid
+      <div className="hidden h-full minh-fit sm:flex items-center border rounded-md">
+        <LayoutGridIcon
           className={clsx(
-            'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
+            "cursor-pointer text-zinc-500 p-1 size-8 rounded-sm m-1",
             {
-              'bg-neutral-800/20 dark:bg-neutral-700/50':
-                searchParams.get('view') === 'grid'
+              "bg-secondary": searchParams.get("view") === "grid",
             }
           )}
-          onClick={() => handleViewItems('grid')}
+          onClick={() => handleViewItems("grid")}
         />
-        <List
+        <ListIcon
           className={clsx(
-            'border border-neutral-200 bg-white shadow-sm cursor-pointer dark:border-neutral-800 dark:bg-neutral-950 h-9 w-9 text-xs p-2',
+            "cursor-pointer text-zinc-500 p-1 size-8 rounded-sm m-1",
             {
-              'bg-neutral-800/20 dark:bg-neutral-700/50':
-                searchParams.get('view') === 'list'
+              "bg-secondary": searchParams.get("view") === "list",
             }
           )}
-          onClick={() => handleViewItems('list')}
+          onClick={() => handleViewItems("list")}
         />
       </div>
       {/* btn create*/}
       <Button
-        className={buttonVariants({
-          variant: 'secondary',
-          className: 'flex gap-2 bg-black text-white h-full'
-        })}
+        className="flex gap-2 bg-black text-white h-full"
         onClick={handleRedirect}
       >
-        <Plus size={14} />
+        <Plus className="size-5" />
         Create Link
       </Button>
     </nav>
-  )
+  );
 }

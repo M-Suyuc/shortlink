@@ -3,7 +3,6 @@ import { ThemeToggle } from './toggle-theme'
 import { MenuProfile } from './menu-profile'
 import { GithubLogo, Logo } from './logos'
 import { auth } from '@/auth'
-import { DropdownMenuSeparator } from './ui/dropdown-menu'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from './ui/button'
 
@@ -12,12 +11,12 @@ const Navbar = async () => {
 
   return (
     <>
-      <nav className='px-6 py-3'>
+      <nav className='px-6 flex items-center h-[4.5rem] border-b bg-black'>
         <div className='max-w-screen-2xl w-full flex flex-wrap items-center justify-between mx-auto'>
           <div className='flex items-center gap-2'>
-            <Link href='#' className='p-2.5 rounded-full bg-black'>
+            <span className='p-2.5 rounded-full bg-black'>
               <Logo className='size-6 ' />
-            </Link>
+            </span>
             <p className='hidden sm:text-white/80 sm:text-lg sm:font-bold'>
               {session?.user?.name}
             </p>
@@ -44,7 +43,6 @@ const Navbar = async () => {
           </div>
         </div>
       </nav>
-      <DropdownMenuSeparator className='w-full' />
     </>
   )
 }

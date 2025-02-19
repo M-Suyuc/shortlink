@@ -11,7 +11,7 @@ const Navbar = async () => {
 
   return (
     <>
-      <nav className='px-6 flex items-center h-[4.5rem] border-b bg-black'>
+      <nav className='px-6 flex items-center h-[4.5rem] border-b'>
         <div className='max-w-screen-2xl w-full flex flex-wrap items-center justify-between mx-auto'>
           <div className='flex items-center gap-2'>
             <span className='p-2.5 rounded-full bg-black'>
@@ -25,9 +25,11 @@ const Navbar = async () => {
             <Link href='https://github.com/M-Suyuc/shortlink' target='_blank'>
               <GithubLogo className='size-6' />
             </Link>
-            <ThemeToggle />
             {session ? (
+              <>
+              <ThemeToggle />
               <MenuProfile session={session?.user} />
+              </>
             ) : (
               <Link
                 href='/dashboard'

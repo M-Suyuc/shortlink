@@ -17,7 +17,10 @@ const DashboardPage = async ({
   const shorts = await prisma.link.findMany({
     where: {
       creatorId: userId
-    }
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
   })
 
   const search = searchParams.search || ''

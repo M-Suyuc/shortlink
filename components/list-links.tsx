@@ -94,9 +94,12 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
             onConfirm={() => onDelete(searchParams.get("id")!!)}
           />
           <div
-            className={clsx("flex flex-col gap-2 ", {
-              "grid gap-2 grid-cols-auto-fill-100": viewMode === "grid",
-            })}
+            className={clsx(
+              "flex flex-col gap-4 sm:grid-cols-2 md:grid-cols-3",
+              {
+                "grid gap-4 md:grid-cols-3": viewMode === "grid",
+              }
+            )}
           >
             {data.map((item: Link) => {
               const formatDate = item.createdAt.toLocaleDateString("en-us", {
@@ -109,14 +112,14 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                 <article
                   key={item.id}
                   className={clsx(
-                    "flex flex-col gap-2 p-4 rounded-md bg-card border",
+                    "flex flex-col gap-2 p-4 rounded-md bg-card overflow-hidden",
                     {
                       " gap-0": viewMode !== "grid",
                     }
                   )}
                 >
                   <div className="flex justify-between">
-                    <p className="text-secondary-foreground">
+                    <p className="text-secondary-foreground ">
                       {item.shortLink}
                     </p>
                     <div className="flex">

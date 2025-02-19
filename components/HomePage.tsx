@@ -109,7 +109,7 @@ export default function Component() {
     <div
       className={`relative w-full bg-background text-white overflow-hidden h-[calc(100vh-4.5rem)] min-h-[calc(100vh-4.5rem)] max-h-screen`}
     >
-      <div className="absolute top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
+      <div className="absolute w-full top-1/2 px-8 md:top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] text-zinc-900 dark:text-zinc-100 select-none">
           Transform Your{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-rose-500 to-purple-500 dark:from-orange-400 dark:via-rose-400 dark:to-purple-400">
@@ -119,7 +119,7 @@ export default function Component() {
           in a Click
         </h1>
 
-        <p className="mt-2 text-lg text-white/80 max-w-2xl mx-auto select-none">
+        <p className="mt-2 text-base md:text-lg text-secondary-foreground/70 max-w-2xl mx-auto select-none">
           Effortlessly shorten, secure, and optimize your links.
         </p>
 

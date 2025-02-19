@@ -62,7 +62,7 @@ export default function LinkClient() {
         />
       </div>
       {/* views */}
-      <div className="hidden h-full minh-fit sm:flex items-center border rounded-md">
+      <div className="hidden h-full min-h-fit md:flex items-center border rounded-md">
         <LayoutGridIcon
           className={clsx(
             "cursor-pointer text-zinc-500 p-1 size-8 rounded-sm m-1",
@@ -87,7 +87,7 @@ export default function LinkClient() {
         className="flex gap-2 bg-black text-white h-full"
         onClick={handleRedirect}
       >
-        <Plus className="size-5" />
+        <Plus className="md:size-5 size-4" />
         Create Link
       </Button>
     </nav>

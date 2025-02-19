@@ -107,10 +107,10 @@ function Scene() {
 export default function Component() {
   return (
     <div
-      className={`relative w-full bg-black text-white overflow-hidden h-[calc(100vh-4.5rem)] min-h-[calc(100vh-4.5rem)] max-h-screen`}
+      className={`relative w-full bg-background text-white overflow-hidden h-[calc(100vh-4.5rem)] min-h-[calc(100vh-4.5rem)] max-h-screen`}
     >
       <div className="absolute top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.1] text-zinc-900 dark:text-zinc-100 select-none">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] text-zinc-900 dark:text-zinc-100 select-none">
           Transform Your{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-rose-500 to-purple-500 dark:from-orange-400 dark:via-rose-400 dark:to-purple-400">
             Links

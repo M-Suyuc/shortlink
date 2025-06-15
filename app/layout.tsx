@@ -7,6 +7,7 @@ import SessionProvider from '@/providers/session-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { ModalProvider } from '@/context/modal'
 import { ToastProvider } from '@/providers/toast-provider'
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: 'Short Link',
@@ -36,6 +37,7 @@ export default function RootLayout({
             </ModalProvider>
           </ThemeProvider>
         </SessionProvider>
+          <Analytics />
       </body>
     </html>
   )

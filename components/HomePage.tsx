@@ -153,7 +153,7 @@ export default function HeroGeometric() {
           >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
-                Transform Yours
+                Transform Your
               </span>
               <br />
               <span

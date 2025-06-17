@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { ThemeToggle } from './toggle-theme'
 import { MenuProfile } from './menu-profile'
 import { GithubLogo, Logo } from './logos'
 import { auth } from '@/auth'
@@ -27,7 +26,6 @@ const Navbar = async () => {
             </Link>
             {session ? (
               <>
-              <ThemeToggle />
               <MenuProfile session={session?.user} />
               </>
             ) : (

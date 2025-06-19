@@ -3,9 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import {
-  LayoutGrid,
   LayoutGridIcon,
-  List,
   ListIcon,
   Plus,
   Search,
@@ -52,11 +50,11 @@ export default function LinkClient() {
   return (
     <nav className="my-4 flex items-center gap-3 h-11">
       {/* search */}
-      <div className="h-full flex-1 relative text-zinc-600">
-        <Search className="absolute top-1/2 transform -translate-y-1/2 tras left-2 sm:left-4 size-3 sm:size-6 " />
+      <div className="h-full flex-1 relative">
+        <Search className="absolute top-1/2 transform -translate-y-1/2 left-2 sm:left-4 size-3.5 sm:size-5 text-zinc-400" />
         <Input
           placeholder="Search your shortLink"
-          className="h-full text-xs sm:text-xl placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-14 "
+          className="h-full text-xs sm:text-xl text-zinc-200 outline outline-[.1px] outline-zinc-800 placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-11"
           onChange={(event) => handleSearch(event.target.value)}
           defaultValue={searchParams.get("search")?.toString()}
         />
@@ -65,18 +63,18 @@ export default function LinkClient() {
       <div className="hidden h-full min-h-fit md:flex items-center border rounded-md">
         <LayoutGridIcon
           className={clsx(
-            "cursor-pointer text-zinc-500 p-1 size-8 rounded-sm m-1",
+            "cursor-pointer text-zinc-400 p-1 size-7 rounded-sm m-1",
             {
-              "bg-secondary": searchParams.get("view") === "grid",
+              "bg-secondary text-zinc-100": searchParams.get("view") === "grid",
             }
           )}
           onClick={() => handleViewItems("grid")}
         />
         <ListIcon
           className={clsx(
-            "cursor-pointer text-zinc-500 p-1 size-8 rounded-sm m-1",
+            "cursor-pointer text-zinc-400 p-1 size-7 rounded-sm m-1",
             {
-              "bg-secondary": searchParams.get("view") === "list",
+              "bg-secondary text-zinc-100": searchParams.get("view") === "list",
             }
           )}
           onClick={() => handleViewItems("list")}

@@ -1,7 +1,7 @@
 'use client'
 
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "ms-ui-toast";
 
 export const ToastProvider = () => {
-  return <Toaster position='top-center' />
+  return <Toaster position='top-right' />
 }

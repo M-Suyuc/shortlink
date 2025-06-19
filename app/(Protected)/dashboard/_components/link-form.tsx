@@ -20,7 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Link } from '@prisma/client'
 import { useModalContext } from '@/context/modal'
 import axios from 'axios'
-import { toast } from 'react-hot-toast'
+import { toast } from 'ms-ui-toast'
 
 const formSchema = z.object({
   url: z
@@ -51,7 +51,7 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
 
   const title = initialData ? 'Edit shortLink' : 'Create a new shortLink'
   const toastMessage = initialData ? 'ShortLink updated.' : 'ShortLink created.'
-  const action = initialData ? 'Save changes' : 'Create'
+  const action = initialData ? 'Save' : 'Create'
 
   const form = useForm<LinkFormValues>({
     resolver: zodResolver(formSchema),
@@ -72,7 +72,7 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
       hideModal()
       router.push(`/dashboard`)
       router.refresh()
-      toast.success(toastMessage)
+      toast.success({ title: toastMessage })
     } catch (error: any) {
       toast.error(error.response.data.message || 'An error occurred')
     } finally {
@@ -81,62 +81,58 @@ const LinkForm: React.FC<LinkFormProps> = ({ initialData }) => {
   }
 
   return (
-    <div>
-      <Modal title={title} isOpen={isOpenModal} onClose={() => router.back()}>
-        <div className='space-y-4 py-2 pb-6'>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name='url'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Url</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        placeholder='https://mi-sitie.com'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='shortLink'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>shortLink</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        placeholder='shortUrl'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className='pt-6 space-x-2 flex items-center justify-end w-full'>
-                <Button
-                  disabled={loading}
-                  variant='outline'
-                  onClick={() => router.back()}
-                >
-                  Cancel
-                </Button>
-                <Button disabled={loading} type='submit'>
-                  {action}
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </div>
-      </Modal>
-    </div>
+    <Modal title={title} isOpen={isOpenModal} onClose={() => router.back()}>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name='url'
+            render={({ field }) => (
+              <FormItem className='mb-4'>
+                <FormLabel>Url</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder='https://mi-sitie.com'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='shortLink'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>shortLink</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    placeholder='shortUrl'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className='pt-6 space-x-2 flex items-center justify-end w-full'>
+            <Button
+              disabled={loading}
+              variant='outline'
+              onClick={() => router.back()}
+            >
+              Cancel
+            </Button>
+            <Button disabled={loading} type='submit'>
+              {action}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </Modal>
   )
 }
 export default LinkForm

@@ -12,7 +12,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useModalContext } from "@/context/modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "ms-ui-toast";
 import { useOrigin } from "@/hooks/use-origin";
 import { AlertModal } from "./modals/alert-modal";
 import clsx from "clsx";
@@ -53,11 +53,11 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
       await axios.delete(`/api/shortUrl/${id}`);
       router.push("/dashboard");
       router.refresh();
-      toast.success("ShortLink deleted.");
+      toast.success({ title: "ShortLink deleted" });
     } catch (error) {
       console.error("Error:", error);
       toast.error(
-        "Make sure you removed all products using this category first."
+        { title: "Make sure you removed all products using this category first" }
       );
     } finally {
       setloading(false);
@@ -80,7 +80,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
   const onCopy = async (shortLink: string) => {
     const url = `${origin}/${shortLink}`;
     navigator.clipboard.writeText(url);
-    toast.success("Copied");
+    toast.success({ title: "Copied" });
   };
 
   return (
@@ -112,7 +112,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                 <article
                   key={item.id}
                   className={clsx(
-                    "flex flex-col gap-2 p-4 rounded-md bg-card overflow-hidden",
+                    "flex flex-col gap-2 p-4 rounded-md outline outline-[.1px] outline-zinc-800 overflow-hidden",
                     {
                       " gap-0": viewMode !== "grid",
                     }

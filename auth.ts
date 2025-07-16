@@ -27,6 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     // sin pages
     // http://localhost:3000/api/auth/signin?error=OAuthCallbackError
   },
+  trustHost: true,
 
   ...authConfig
 })

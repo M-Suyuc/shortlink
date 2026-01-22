@@ -30,7 +30,7 @@
     "framer-motion": "^12.18.1",
     "lucide-react": "0.378.0",
     "ms-ui-toast": "^0.0.12",
-    "next": "14.2.3",
+    "next": "14.2.35",
     "next-auth": "5.0.0-beta.18",
     "next-themes": "0.3.0",
     "react": "18",

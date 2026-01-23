@@ -12,8 +12,8 @@ const Navbar = async () => {
     <nav className='flex items-center h-[4.5rem] border-b bg-background'>
       <div className='max-w-screen-2xl w-full flex px-4 flex-wrap items-center justify-between mx-auto'>
         <div className='flex items-center gap-2'>
-          <span className='p-2.5 rounded-full bg-black'>
-            <Logo className='size-6 ' />
+          <span className='text-2xl select-none'>
+            <Logo />
           </span>
           <p className='hidden sm:text-white/80 sm:text-lg sm:font-bold'>
             {session?.user?.name}

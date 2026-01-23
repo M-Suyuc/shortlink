@@ -152,7 +152,7 @@ export default function HeroGeometric() {
             animate="visible"
           >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+              <span className="text-white">
                 Transform Your
               </span>
               <br />
@@ -173,11 +173,11 @@ export default function HeroGeometric() {
             initial="hidden"
             animate="visible"
           >
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Effortlessly shorten, secure, and optimize your links.
             </p>
             <Link href="/dashboard">
-              <RainbowButton className="md:text-xl sm:text-lg font-medium">
+              <RainbowButton className="md:text-xl sm:text-lg text-black py-6 hover:opacity-95">
                 Create a shortLink
               </RainbowButton>
             </Link>

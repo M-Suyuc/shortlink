@@ -112,7 +112,7 @@ export const ListLinks: React.FC<Props> = ({ data }) => {
                 <article
                   key={item.id}
                   className={clsx(
-                    "flex flex-col gap-2 p-4 rounded-md outline outline-[.1px] outline-zinc-800 overflow-hidden",
+                    "flex flex-col gap-2 p-4 rounded-md outline-solid outline-[.1px] outline-zinc-800 overflow-hidden",
                     {
                       " gap-0": viewMode !== "grid",
                     }

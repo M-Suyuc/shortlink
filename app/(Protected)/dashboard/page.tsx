@@ -29,7 +29,7 @@ const DashboardPage = async ({
   )
 
   return (
-    <div className='max-w-screen-2xl px-4 mx-auto'>
+    <div className='max-w-(--breakpoint-2xl) px-4 mx-auto'>
       <LinkClient />
       <Suspense key={search} fallback={<Loading />}>
         <ListLinks data={filterShortLinks} />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { easeIn, easeOut, motion } from "framer-motion";
 import { Permanent_Marker } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Logo } from "./logos";
 
 const permanent_Marker = Permanent_Marker({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ function ElegantShape({
   width = 400,
   height = 100,
   rotate = 0,
-  gradient = "from-white/[0.08]",
+  gradient = "from-white/8",
 }: {
   className?: string;
   delay?: number;
@@ -65,9 +66,9 @@ function ElegantShape({
         <div
           className={cn(
             "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
+            "bg-linear-to-r to-transparent",
             gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.15]",
+            "backdrop-blur-[2px] border-2 border-white/15",
             "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
             "after:absolute after:inset-0 after:rounded-full",
             "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
@@ -93,8 +94,8 @@ export default function HeroGeometric() {
   };
 
   return (
-    <div className="relative h-[calc(100vh-4.5rem)] min-h-[calc(100vh-4.5rem)] max-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <div className="relative h-[calc(100vh-4.5rem)] min-h-[calc(100vh-4.5rem)] max-h-screen w-full flex items-center justify-center overflow-hidden dark:bg-[#030303]">
+      <div className="absolute inset-0 bg-linear-to-br  from-indigo-500/5 via-transparent to-rose-500/5 blur-3xl" />
 
       <div className="absolute inset-0 overflow-hidden">
         <ElegantShape
@@ -102,8 +103,8 @@ export default function HeroGeometric() {
           width={600}
           height={140}
           rotate={12}
-          gradient="from-indigo-500/[0.15]"
-          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+          gradient="from-indigo-500/15"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]  hidden md:block"
         />
 
         <ElegantShape
@@ -111,8 +112,8 @@ export default function HeroGeometric() {
           width={500}
           height={120}
           rotate={-15}
-          gradient="from-rose-500/[0.15]"
-          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+          gradient="from-rose-500/15"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]  hidden md:block"
         />
 
         <ElegantShape
@@ -120,8 +121,17 @@ export default function HeroGeometric() {
           width={300}
           height={80}
           rotate={-8}
-          gradient="from-violet-500/[0.15]"
+          gradient="from-violet-500/15"
           className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
+
+        <ElegantShape
+          delay={0.3}
+          width={200}
+          height={60}
+          rotate={20}
+          gradient="from-yellow-500/15"
+          className="right-[5%] bottom-[20%] md:hidden"
         />
 
         <ElegantShape
@@ -129,7 +139,7 @@ export default function HeroGeometric() {
           width={200}
           height={60}
           rotate={20}
-          gradient="from-amber-500/[0.15]"
+          gradient="from-amber-500/15"
           className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
         />
 
@@ -138,12 +148,13 @@ export default function HeroGeometric() {
           width={150}
           height={40}
           rotate={-25}
-          gradient="from-cyan-500/[0.15]"
+          gradient="from-cyan-500/15"
           className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 md:px-6">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 
+      ">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             custom={1}
@@ -151,14 +162,14 @@ export default function HeroGeometric() {
             initial="hidden"
             animate="visible"
           >
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 tracking-tight">
-              <span className="text-white">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4">
+              <span className="">
                 Transform Your
               </span>
               <br />
               <span
                 className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ",
+                  "bg-linear-to-l from-rose-300 via-purple-300 to-indigo-500 bg-clip-text text-transparent",
                   permanent_Marker.className
                 )}
               >
@@ -177,15 +188,15 @@ export default function HeroGeometric() {
               Effortlessly shorten, secure, and optimize your links.
             </p>
             <Link href="/dashboard">
-              <RainbowButton className="md:text-xl sm:text-lg text-black py-6 hover:opacity-95">
-                Create a shortLink
+              <RainbowButton size={"lg"} className="text-white text-lg md:text-xl dark:text-black">
+                <Logo className="mr-2 size-6" /> Create a Link
               </RainbowButton>
             </Link>
           </motion.div>
         </div>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
+      <div className="dark:absolute inset-0 bg-linear-to-t from-[#030303]/60 via-transparent to-[#030303]/60 pointer-events-none" />
     </div>
   );
 }

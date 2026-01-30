@@ -39,27 +39,27 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex justify-center gap-4 min-h-[calc(100vh-4.5rem)] h-full">
-      <div className=" flex flex-col  mt-16 gap-4 p-8 rounded-md  h-fit">
-        <p className="text-[32px] font-bold text-white mb-4">Sign In</p>
-        {socialProviders.map((sp) => (
-          <Button
-            key={sp.provider}
-            variant="outline"
-            className="flex gap-4 border-neutral-700 py-6 px-8 w-full"
-            disabled={loading}
-            name={sp.name}
-            onClick={() => handleSocialLogin(sp.provider)}
-          >
-            {provider === sp.provider ? (
-              <Loader className="animate-spin" size={18} />
-            ) : (
-              <div>{sp.icon}</div>
-            )}
-            <span>{sp.name}</span>
-          </Button>
-        ))}
-      </div>
+    <div className="flex justify-center items-center md:items-start gap-4 min-h-[calc(100vh-4.5rem)] h-full dark:bg-[#030303]">
+    <div className=" flex flex-col w-fit md:mt-40 gap-4 p-8 rounded-md  h-fit border border-neutral-200 dark:border-neutral-700 bg-card backdrop-blur-sm">
+      <p className="text-4xl font-bold text-card mb-4">Sign In</p>
+      {socialProviders.map((sp) => (
+        <Button
+          key={sp.provider}
+          variant="outline"
+          className="flex gap-4 py-6 px-8 w-full cursor-pointer"
+          disabled={loading}
+          name={sp.name}
+          onClick={() => handleSocialLogin(sp.provider)}
+        >
+          {provider === sp.provider ? (
+            <Loader className="animate-spin" size={18} />
+          ) : (
+            <div>{sp.icon}</div>
+          )}
+          <span>{sp.name}</span>
+        </Button>
+      ))}
+    </div>
     </div>
   );
 };

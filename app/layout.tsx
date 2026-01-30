@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es' suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} selection:bg-neutral-200/50 dark:selection:bg-neutral-100/15`}>
         <SessionProvider>
           <ThemeProvider
             attribute='class'

@@ -1,4 +1,4 @@
-import prisma from '@/lib/prismadb'
+import {prisma} from '@/lib/prismadb'
 import { auth } from '@/auth'
 import { NextResponse } from 'next/server'
 
@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const body = await req.json()
     const session = await auth()
 
-    const { url, shortLink } = body
+    const { url, shortLink, description } = body
 
     const userId = session?.user?.id
 
@@ -35,7 +35,8 @@ export async function POST(req: Request) {
       data: {
         url,
         shortLink,
-        creatorId: userId
+        creatorId: userId,
+        description
       }
     })
 

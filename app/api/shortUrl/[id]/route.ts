@@ -1,4 +1,4 @@
-import prisma from "@/lib/prismadb";
+import {prisma} from "@/lib/prismadb";
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
@@ -11,7 +11,7 @@ export async function PUT(
     const body = await req.json();
     const session = await auth();
 
-    const { url, shortLink } = body;
+    const { url, shortLink, description } = body;
 
     const userId = session?.user?.id;
 
@@ -33,6 +33,7 @@ export async function PUT(
       data: {
         url,
         shortLink,
+        description
       },
     });
 

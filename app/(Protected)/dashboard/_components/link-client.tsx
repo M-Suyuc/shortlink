@@ -5,25 +5,18 @@ import { useDebouncedCallback } from "use-debounce";
 import {
   LayoutGridIcon,
   ListIcon,
-  Plus,
   Search,
 } from "lucide-react";
 import clsx from "clsx";
-import { useModalContext } from "@/context/modal";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CreateLink } from "@/components/modals/create-link-form";
 
-export default function LinkClient() {
+export function NavbarDashboard() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { showModal } = useModalContext();
 
-  const handleRedirect = () => {
-    router.push(`${pathname}/link/new`);
-    showModal();
-  };
 
   const handleSearch = useDebouncedCallback((search: string) => {
     const params = new URLSearchParams(searchParams);
@@ -48,46 +41,47 @@ export default function LinkClient() {
   };
 
   return (
-    <nav className="my-4 flex items-center gap-3 h-11">
-      {/* search */}
-      <div className="h-full flex-1 relative">
-        <Search className="absolute top-1/2 transform -translate-y-1/2 left-2 sm:left-4 size-3.5 sm:size-5 text-zinc-400" />
-        <Input
-          placeholder="Search your shortLink"
-          className="h-full text-xs sm:text-xl text-zinc-200 outline-solid outline-[.1px] outline-zinc-800 placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-11"
-          onChange={(event) => handleSearch(event.target.value)}
-          defaultValue={searchParams.get("search")?.toString()}
-        />
-      </div>
-      {/* views */}
-      <div className="hidden h-full min-h-fit md:flex items-center border rounded-md">
-        <LayoutGridIcon
-          className={clsx(
-            "cursor-pointer text-zinc-400 p-1 size-7 rounded-sm m-1",
-            {
-              "bg-secondary text-zinc-100": searchParams.get("view") === "grid",
-            }
-          )}
-          onClick={() => handleViewItems("grid")}
-        />
-        <ListIcon
-          className={clsx(
-            "cursor-pointer text-zinc-400 p-1 size-7 rounded-sm m-1",
-            {
-              "bg-secondary text-zinc-100": searchParams.get("view") === "list",
-            }
-          )}
-          onClick={() => handleViewItems("list")}
-        />
-      </div>
-      {/* btn create*/}
-      <Button
-        className="flex gap-2 bg-black text-white h-full"
-        onClick={handleRedirect}
-      >
-        <Plus className="md:size-5 size-4" />
-        Create Link
-      </Button>
-    </nav>
+    <>
+      <nav className="max-w-(--breakpoint-2xl) py-5 mx-auto">
+        <div className="flex items-center gap-1.5 w-full h-11">
+          {/* search */}
+          <div className="h-full flex-1 relative">
+            <Search className="absolute top-1/2 transform -translate-y-1/2 left-2 sm:left-4 size-3.5 sm:size-5 text-zinc-400" />
+            <Input
+              placeholder="Search your shortLink"
+              className="h-full text-xs sm:text-xl text-secondary placeholder:text-xs sm:placeholder:text-base pl-6 sm:pl-11 focus-visible:ring-neutral-300 dark:focus-visible:ring-neutral-700"
+              onChange={(event) => handleSearch(event.target.value)}
+              defaultValue={searchParams.get("search")?.toString()}
+            />
+          </div>
+          {/* views */}
+          <div className="hidden h-full min-h-fit md:flex items-center gap-1.5 rounded-md">
+            <span className={clsx("h-full border border-neutral-100 dark:border-neutral-800 inline-flex items-center rounded-md p-3 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer",
+              {
+                "bg-neutral-200 dark:bg-neutral-800": searchParams.get("view") === "grid",
+              })}
+              onClick={() => handleViewItems("grid")}
+            >
+              <LayoutGridIcon
+                className="size-5"
+              />
+            </span>
+            <span className={clsx("h-full border border-neutral-100 dark:border-neutral-800 inline-flex items-center rounded-md p-3 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer",
+              {
+                "bg-neutral-200 dark:bg-neutral-800": searchParams.get("view") === "list",
+              })}
+              onClick={() => handleViewItems("list")}
+            >
+              <ListIcon
+                className={"size-5"}
+              />
+            </span>
+          </div>
+          {/* btn create*/}
+          <CreateLink />
+
+        </div>
+      </nav>
+    </>
   );
 }

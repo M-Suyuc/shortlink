@@ -188,7 +188,7 @@ export default function HeroGeometric() {
               Effortlessly shorten, secure, and optimize your links.
             </p>
             <Link href="/dashboard">
-              <RainbowButton size={"lg"} className="text-white text-lg md:text-xl dark:text-black">
+              <RainbowButton size={"lg"} className="text-white text-lg h-12 md:text-xl dark:text-black">
                 <Logo className="mr-2 size-6" /> Create a Link
               </RainbowButton>
             </Link>

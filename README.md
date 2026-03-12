@@ -6,7 +6,7 @@ Shortlink is a simple URL shortening service that allows you to create short, ea
 
 - **Nextjs**: Programming language for building the application.
 - **Prisma**: ORM with an intuitive data model, automated migrations, type-safety, and auto-completion.
-- **Turso**: Database for storing URL data.
+- **NEON**: Postgres Databases for storing URL data.
 - **Authjs**: Authentication.
 - **Tailwind CSS**: CSS framework for responsive design.
 
@@ -48,8 +48,10 @@ npm install
 6. Run Prisma's Mirations
 
 ```sh
-npx prisma migrate dev
+npx prisma generate
+npx prisma db push
 ```
+# npx prisma migrate dev
 
 7. Run proyect
 
@@ -70,6 +72,10 @@ npm run dev
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
+```bash
+git clone git@github.com:M-Suyuc/shortlink.git
+```
+
 2. Create a new branch:
 
 ```bash

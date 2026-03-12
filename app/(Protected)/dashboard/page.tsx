@@ -1,9 +1,10 @@
 import { auth } from '@/auth'
-import prisma from '@/lib/prismadb'
-import LinkClient from './_components/link-client'
+import { NavbarDashboard } from './_components/link-client'
 import { ListLinks } from '@/components/list-links'
 import { Suspense } from 'react'
 import Loading from '@/components/ui/loading'
+import { Link } from 'lucide-react'
+import { prisma } from '@/lib/prismadb'
 
 const DashboardPage = async ({
   searchParams
@@ -21,7 +22,6 @@ const DashboardPage = async ({
       createdAt: "desc",
     },
   })
-
   const search = searchParams.search || ''
 
   const filterShortLinks = shorts.filter((short) =>
@@ -29,18 +29,21 @@ const DashboardPage = async ({
   )
 
   return (
-    <div className='max-w-(--breakpoint-2xl) px-4 mx-auto'>
-      <LinkClient />
-      <Suspense key={search} fallback={<Loading />}>
-        <ListLinks data={filterShortLinks} />
-      </Suspense>
-      {shorts.length === 0 && (
-        <div className='min-h-[calc(100vh-10rem)] grid place-items-center'>
-          <span className='text-xl selection:not-sr-only text-neutral-900 dark:text-neutral-500'>
-            Start by creating your first shortlink!
-          </span>
-        </div>
-      )}
+    <div className='dark:bg-[#030303] w-full h-[calc(100vh-4.5rem)]'>
+      <div className='max-w-(--breakpoint-2xl) w-full mx-auto px-4 '>
+        <NavbarDashboard />
+        <Suspense key={search} fallback={<Loading />}>
+          <ListLinks data={filterShortLinks} />
+        </Suspense>
+        {shorts.length === 0 && (
+          <div className='grid place-items-center h-[calc(100vh-4.5rem)] dark:bg-[#030303] text-neutral-500/60'>
+            <span className='inline-flex  items-center  gap-4 text-xl md:text-3xl '>
+              <Link className="size-8" />
+              Create your first shortlink
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

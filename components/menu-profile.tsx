@@ -27,19 +27,19 @@ export function MenuProfile({ session }: { session: any }) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-64 mr-6 mt-3 py-4 rounded-md">
-        <DropdownMenuLabel>{session.name}</DropdownMenuLabel>
-        <DropdownMenuLabel className="text-foreground/60 py-0 font-light">
+        <DropdownMenuLabel className="text-secondary">{session.name}</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-accent py-0 font-light">
           {session.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem asChild className="cursor-pointer  py-2">
+        <DropdownMenuItem asChild className="cursor-pointer py-2">
           <Link
             href="/home"
             target="_blank"
-            className="text-sm w-full h-full text-foreground/80 flex items-center"
+            className="text-sm w-full h-full text-accent gap-2"
           >
-            <LucideHome className="size-[18px] mr-3 text-foreground/80" />
+            <LucideHome className="size-4 text-accent" />
             Home Page
           </Link>
         </DropdownMenuItem>
@@ -47,9 +47,9 @@ export function MenuProfile({ session }: { session: any }) {
         <DropdownMenuItem asChild className="cursor-pointer py-2">
           <Link
             href="/dashboard"
-            className="text-sm w-full h-full text-foreground/80 flex items-center"
+            className="text-sm w-full h-full text-accent gap-2"
           >
-            <BoxesIcon className="size-[18px] mr-3 text-foreground/80" />
+            <BoxesIcon className="size-4 text-accent" />
             Dashboard
           </Link>
         </DropdownMenuItem>
@@ -57,9 +57,9 @@ export function MenuProfile({ session }: { session: any }) {
         <DropdownMenuItem asChild className="cursor-pointer py-2">
           <Link
             href="/dashboard"
-            className="text-sm w-full h-full text-foreground/80 flex items-center "
+            className="text-sm w-full h-full text-accent gap-2"
           >
-            <Settings className="size-[18px] mr-3 text-foreground/80" />
+            <Settings className="size-4 text-accent" />
             Settings
           </Link>
         </DropdownMenuItem>
@@ -71,9 +71,9 @@ export function MenuProfile({ session }: { session: any }) {
               callbackUrl: "/",
             })
           }
-          className="cursor-pointer text-sm w-full h-full text-foreground/80"
+          className="cursor-pointer text-sm w-full h-full text-accent gap-2"
         >
-          <LogOut className="size-[18px] mr-3 text-foreground/80" />
+          <LogOut className="size-4 text-accent" />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

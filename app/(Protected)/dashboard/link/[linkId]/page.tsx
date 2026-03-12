@@ -1,4 +1,4 @@
-import prisma from '@/lib/prismadb'
+import { prisma } from '@/lib/prismadb'
 import LinkForm from '../../_components/link-form'
 
 const Page = async ({ params }: { params: { linkId: string } }) => {

@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import prisma from '@/lib/prismadb'
+import { prisma } from '@/lib/prismadb'
 import { redirect } from 'next/navigation'
 
 export default function Redirect() {

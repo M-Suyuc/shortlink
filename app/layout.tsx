@@ -5,7 +5,6 @@ import { inter } from '@/config/fonts'
 
 import SessionProvider from '@/providers/session-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
-import { ModalProvider } from '@/context/modal'
 import { ToastProvider } from '@/providers/toast-provider'
 import { Analytics } from "@vercel/analytics/next"
 
@@ -30,14 +29,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <ModalProvider>
-              <ToastProvider />
-              <Navbar />
-              {children}
-            </ModalProvider>
+            <ToastProvider />
+            <Navbar />
+            {children}
           </ThemeProvider>
         </SessionProvider>
-          <Analytics />
+        <Analytics />
       </body>
     </html>
   )
